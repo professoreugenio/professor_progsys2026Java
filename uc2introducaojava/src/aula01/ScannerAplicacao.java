@@ -1,4 +1,4 @@
-package revisao;
+package aula01;
 
 import java.util.Scanner; // inportando a biblioteca Scanner
 

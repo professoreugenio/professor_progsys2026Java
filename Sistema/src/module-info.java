@@ -4,7 +4,7 @@
 /**
  * 
  */
-module uc2introducaojava {
+module Sistema {
     requires java.desktop;
 
 }

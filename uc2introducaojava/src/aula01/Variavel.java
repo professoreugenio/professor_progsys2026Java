@@ -1,4 +1,4 @@
-package revisao;
+package aula01;
 
 public class Variavel {
 

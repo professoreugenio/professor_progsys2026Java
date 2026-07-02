@@ -1,7 +1,5 @@
-package revisao;
-
+package aula01;
 import java.util.Scanner;
-
 public class Atividade_1 {
 
 	public static void main(String[] args) {
@@ -30,7 +28,7 @@ public class Atividade_1 {
 		System.out.println("E-MAIL: "+ email);
 		System.out.println("IDADE: "+ idade);
 		System.out.println("PROFISSÃO: "+ profissao);
-		//
+		
 		
 		
 		input.close();
