@@ -6,12 +6,14 @@ public class Calculadora {
 
 	public static void main(String[] args) {
 		
+		HoraDatapadrao datahora = new HoraDatapadrao();
+		
 		Scanner input = new Scanner(System.in);
 		int numero, valida = 1;
 		
 		while(valida==1) {
 			
-			System.out.println("DIGITE UM NÚMERO PARA VER A TABUADA\nDigite 0 para sair");
+			System.out.println("Em: "+ datahora.dataFormatada()+"\nDIGITE UM NÚMERO PARA VER A TABUADA\nDigite 0 para sair");
 			numero = input.nextInt();
 			
 			for(int i = 1; i<=10;i++) {			
