@@ -24,6 +24,7 @@ public class Calculadora {
 				valida=0;
 			}
 		}
+		input.close();
 		
 		System.out.println("\n\n----------------------------------\n"
 				+ "\nSAIU DA TABUADA\n\n" + 
