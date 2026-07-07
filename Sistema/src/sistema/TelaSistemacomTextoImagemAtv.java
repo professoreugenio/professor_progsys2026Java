@@ -12,7 +12,7 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 
-public class TelaSistemacomTextoImagemButton {
+public class TelaSistemacomTextoImagemAtv {
 	public static void main(String[] args) {
 
 		JFrame tela = new JFrame();
