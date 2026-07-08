@@ -1,4 +1,4 @@
-package aula7;
+package aula07;
 import java.util.ArrayList;
 public class ArrayListAtiv2 {
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package aula7;
+package aula07;
 
 public class Arrayrevisao {
 
