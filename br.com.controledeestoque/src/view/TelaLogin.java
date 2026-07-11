@@ -14,13 +14,16 @@ import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import javax.swing.JPasswordField;
 
 public class TelaLogin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textLogin;
-	private JTextField txtSenha;
+	private JTextField txtLogin;
+	private JPasswordField txtSenha;
+	private char caracterePadrao;
+	
 
 	/**
 	 * Launch the application.
@@ -69,39 +72,73 @@ public class TelaLogin extends JFrame {
 		lblSenha.setBounds(67, 130, 49, 14);
 		contentPane.add(lblSenha);
 		
-		textLogin = new JTextField();
-		textLogin.setBounds(124, 82, 204, 26);
-		contentPane.add(textLogin);
-		textLogin.setColumns(10);
 		
-		txtSenha = new JTextField();
-		txtSenha.setColumns(10);
-		txtSenha.setBounds(124, 124, 204, 26);
-		contentPane.add(txtSenha);
 		
-		JButton btnNewButton = new JButton("ENTRAR");
-		btnNewButton.addActionListener(new ActionListener() {
+		
+		
+		
+		JCheckBox chkMostrarSenha = new JCheckBox("Mostrar Senha");
+		chkMostrarSenha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
-				
+				if(chkMostrarSenha.isSelected()) {
+					txtSenha.setEchoChar((char) 0);
+				} else {
+					txtSenha.setEchoChar(caracterePadrao);
+					
+				}
 			}
 		});
-		btnNewButton.setBounds(124, 190, 97, 32);
-		contentPane.add(btnNewButton);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Mostrar Senha");
-		chckbxNewCheckBox.setBounds(124, 160, 204, 23);
-		contentPane.add(chckbxNewCheckBox);
-		
+		chkMostrarSenha.setBounds(124, 160, 204, 23);
+		contentPane.add(chkMostrarSenha);
 		JButton btnSair = new JButton("SAIR");
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					
+				
 		
 			}
 		});
 		btnSair.setBounds(231, 190, 97, 32);
 		contentPane.add(btnSair);
+		
+		
+		
+		JButton btEntrar = new JButton("ENTRAR");
+		btEntrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				String login = txtLogin.getText().trim();
+				String senha = new String(txtSenha.getPassword());
+				
+				if(login.isEmpty() || senha.isEmpty()) {
+					
+					
+					
+				}
+				
+			}
+		});
+		btEntrar.setBounds(124, 190, 97, 32);
+		contentPane.add(btEntrar);
+		
+		
+		
+		
+		txtSenha = new JPasswordField();
+		txtSenha.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSenha.setBounds(126, 121, 204, 26);
+		contentPane.add(txtSenha);
+		/*Aqui defino caracter padrão*/
+		caracterePadrao = txtSenha.getEchoChar();
+		
+		txtLogin = new JTextField();
+		txtLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		txtLogin.setBounds(124, 84, 204, 26);
+		contentPane.add(txtLogin);
+		txtLogin.setColumns(10);
+		
+		
 		setLocationRelativeTo(null);
 
 	}
