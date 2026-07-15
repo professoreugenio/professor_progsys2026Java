@@ -23,6 +23,8 @@ public class TelaLogin extends JFrame {
 	private JTextField txtLogin;
 	private JPasswordField txtSenha;
 	private char caracterePadrao;
+	private JCheckBox chkMostrarSenha;
+
 	
 
 	/**
@@ -95,7 +97,7 @@ public class TelaLogin extends JFrame {
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					
-				
+				System.exit(ABORT);
 		
 			}
 		});

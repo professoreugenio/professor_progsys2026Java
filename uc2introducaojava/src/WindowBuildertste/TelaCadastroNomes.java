@@ -106,6 +106,7 @@ public class TelaCadastroNomes extends JFrame {
 				}
 				
 				if (nome.isEmpty()|| valorTexto.isEmpty()) {
+					
 				    JOptionPane.showMessageDialog(null, "Digite um nome antes de registrar.");
 				    txtNome.requestFocus();
 				    return;
