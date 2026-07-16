@@ -19,6 +19,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Insets;
+import java.awt.Rectangle;
 
 
 public class TelaCadastroNomes extends JFrame {
@@ -52,9 +54,10 @@ public class TelaCadastroNomes extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaCadastroNomes() {
+		
 		setTitle("Cadastro de Nomes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 800, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -63,14 +66,16 @@ public class TelaCadastroNomes extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
 		
-		JLabel lblNewLabel = new JLabel("Nome");
-		
 		txtNome = new JTextField();
+		txtNome.setBounds(129, 70, 220, 30);
+		txtNome.setMargin(new Insets(2, 10, 2, 10));
 		txtNome.setColumns(20);
 		
 		
 		
 		txtValor = new JTextField();
+		txtValor.setMargin(new Insets(2, 10, 2, 10));
+		
 		txtValor.setColumns(10);
 		
 		JButton btnRegistrar = new JButton("Registrar");
@@ -123,31 +128,29 @@ public class TelaCadastroNomes extends JFrame {
 		JLabel lblNewLabel_3 = new JLabel("Quantidade");
 		
 		txtQuantidade = new JTextField();
+		txtQuantidade.setBounds(new Rectangle(0, 0, 0, 25));
+		txtQuantidade.setMargin(new Insets(2, 10, 2, 10));
 		txtQuantidade.setColumns(10);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(73)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(40)
-							.addComponent(lblNewLabel)
-							.addGap(5)
-							.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(73)
-							.addComponent(lblNewLabel_1)))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(lblNewLabel_1)
+						.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE))
+					.addGap(60)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblNewLabel_2)
-						.addComponent(txtValor, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(txtQuantidade, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(txtValor, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE))
+					.addGap(37)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel_3)
-						.addComponent(btnRegistrar))
-					.addContainerGap(108, Short.MAX_VALUE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(txtQuantidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(26)
+							.addComponent(btnRegistrar))
+						.addComponent(lblNewLabel_3))
+					.addGap(247))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -158,18 +161,12 @@ public class TelaCadastroNomes extends JFrame {
 							.addComponent(lblNewLabel_2)
 							.addComponent(lblNewLabel_3))
 						.addComponent(lblNewLabel_1))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(9)
-							.addComponent(lblNewLabel))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(6)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtValor, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtQuantidade, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnRegistrar))))
+					.addGap(6)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtValor, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtQuantidade, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnRegistrar)
+						.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
@@ -183,10 +180,16 @@ public class TelaCadastroNomes extends JFrame {
 		modeloTabela.addColumn("Nº");
 		modeloTabela.addColumn("Nome");
 		modeloTabela.addColumn("Valor");
-		modeloTabela.addColumn("Quantidade");
+		modeloTabela.addColumn("Qt.");
 		modeloTabela.addColumn("Total");
 
 		tabelaNomes.setModel(modeloTabela);
+		tabelaNomes.getColumnModel().getColumn(0).setPreferredWidth(20); // Nome
+		tabelaNomes.getColumnModel().getColumn(1).setPreferredWidth(200); // Nome
+		tabelaNomes.getColumnModel().getColumn(2).setPreferredWidth(50); // Nome
+		tabelaNomes.getColumnModel().getColumn(3).setPreferredWidth(50); // Nome
+		tabelaNomes.getColumnModel().getColumn(4).setPreferredWidth(100); // Nome
+		
 
 	}
 }
