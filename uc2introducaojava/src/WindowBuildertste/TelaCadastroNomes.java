@@ -22,7 +22,6 @@ import java.awt.event.ActionEvent;
 import java.awt.Insets;
 import java.awt.Rectangle;
 
-
 public class TelaCadastroNomes extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -54,7 +53,7 @@ public class TelaCadastroNomes extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaCadastroNomes() {
-		
+
 		setTitle("Cadastro de Nomes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 400);
@@ -62,76 +61,46 @@ public class TelaCadastroNomes extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
-		
+
 		txtNome = new JTextField();
 		txtNome.setBounds(129, 70, 220, 30);
 		txtNome.setMargin(new Insets(2, 10, 2, 10));
 		txtNome.setColumns(20);
-		
-		
-		
+
 		txtValor = new JTextField();
 		txtValor.setMargin(new Insets(2, 10, 2, 10));
-		
+
 		txtValor.setColumns(10);
-		
+
 		JButton btnRegistrar = new JButton("Registrar");
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-			
-				
-				String nome = txtNome.getText().trim();
-				String valorTexto = txtValor.getText().trim().replace(",", ".");
-				String quantidadeTexto = txtQuantidade.getText().trim();
-				
-				
-				try {
-					
-					double valor =Double.parseDouble(valorTexto); 
-					int quantidade = Integer.parseInt(quantidadeTexto);
-					double total = valor * quantidade;
-					
-					
-					modeloTabela.addRow(new Object[] { contadorCadastro, nome, valorTexto,quantidade, total });
-					contadorCadastro++;
-					
-					
-					txtNome.setText("");
-					txtQuantidade.setText("");
-					txtValor.setText("");
-					txtNome.requestFocus();
-							
-					
-				} catch (NumberFormatException e2) {
-					// TODO: handle exception
-				}
-				
-				if (nome.isEmpty()|| valorTexto.isEmpty()) {
-					
-				    JOptionPane.showMessageDialog(null, "Digite um nome antes de registrar.");
-				    txtNome.requestFocus();
-				    return;
-				}
-				
-				
-				
+
+				adicionar();
+
 			}
 		});
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Produto");
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Valor");
-		
+
 		JLabel lblNewLabel_3 = new JLabel("Quantidade");
-		
+
 		txtQuantidade = new JTextField();
 		txtQuantidade.setBounds(new Rectangle(0, 0, 0, 25));
 		txtQuantidade.setMargin(new Insets(2, 10, 2, 10));
 		txtQuantidade.setColumns(10);
+		
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				excluirLinhaSelecionada();
+			}
+		});
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -149,9 +118,11 @@ public class TelaCadastroNomes extends JFrame {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(txtQuantidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addGap(26)
-							.addComponent(btnRegistrar))
+							.addComponent(btnRegistrar)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblNewLabel_3))
-					.addGap(247))
+					.addGap(164))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -167,16 +138,84 @@ public class TelaCadastroNomes extends JFrame {
 						.addComponent(txtValor, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtQuantidade, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnRegistrar)
-						.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnExcluir))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
-		
+
 		tabelaNomes = new JTable();
+		tabelaNomes.setCellSelectionEnabled(true);
 		scrollPane.setViewportView(tabelaNomes);
+		
+		configurarTabela();
+
+	}
+
+	private void excluirLinhaSelecionada() {
+
+		int linhaSelecionada = tabelaNomes.getSelectedRow();
+
+		if (linhaSelecionada == -1) {
+			JOptionPane.showMessageDialog(
+				this,
+				"Selecione uma linha da tabela para excluir.",
+				"Atenção",
+				JOptionPane.WARNING_MESSAGE
+			);
+
+			return;
+		}
+
+		int resposta = JOptionPane.showConfirmDialog(
+			this,
+			"Deseja realmente excluir a linha selecionada?",
+			"Confirmar exclusão",
+			JOptionPane.YES_NO_OPTION
+		);
+
+		if (resposta == JOptionPane.YES_OPTION) {
+			modeloTabela.removeRow(linhaSelecionada);
+		}
+	}
+	
+	public void adicionar() {
+		String nome = txtNome.getText().trim();
+		String valorTexto = txtValor.getText().trim().replace(",", ".");
+		String quantidadeTexto = txtQuantidade.getText().trim();
+
+		try {
+
+			double valor = Double.parseDouble(valorTexto);
+			int quantidade = Integer.parseInt(quantidadeTexto);
+			double total = valor * quantidade;
+
+			if (nome.isEmpty() || valorTexto.isEmpty()) {
+
+				JOptionPane.showMessageDialog(null, "Digite um nome antes de registrar.");
+				txtNome.requestFocus();
+				return;
+			} else {
+
+				modeloTabela.addRow(new Object[] { contadorCadastro, nome, valorTexto, quantidade, total });
+				contadorCadastro++;
+
+				txtNome.setText("");
+				txtQuantidade.setText("");
+				txtValor.setText("");
+				txtNome.requestFocus();
+			}
+
+		} catch (NumberFormatException e2) {
+			// TODO: handle exception
+		}
+	}
+	
+	private void configurarTabela() {
+		
 		modeloTabela = new DefaultTableModel();
 		modeloTabela.addColumn("Nº");
 		modeloTabela.addColumn("Nome");
@@ -185,12 +224,10 @@ public class TelaCadastroNomes extends JFrame {
 		modeloTabela.addColumn("Total");
 
 		tabelaNomes.setModel(modeloTabela);
-		tabelaNomes.getColumnModel().getColumn(0).setPreferredWidth(20); // Nome
+		tabelaNomes.getColumnModel().getColumn(0).setPreferredWidth(10); // Nome
 		tabelaNomes.getColumnModel().getColumn(1).setPreferredWidth(200); // Nome
 		tabelaNomes.getColumnModel().getColumn(2).setPreferredWidth(50); // Nome
 		tabelaNomes.getColumnModel().getColumn(3).setPreferredWidth(50); // Nome
 		tabelaNomes.getColumnModel().getColumn(4).setPreferredWidth(100); // Nome
-		
-
 	}
 }
